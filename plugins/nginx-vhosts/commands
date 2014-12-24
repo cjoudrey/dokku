@@ -45,6 +45,8 @@ EOF
 
         SSL_HOSTNAME=$(openssl x509 -in $SSL_INUSE/server.crt -noout -subject | tr '/' '\n' | grep CN= | cut -c4-)
         SSL_HOSTNAME=$(echo "$SSL_HOSTNAME" | sed 's|\.|\\.|g' | sed 's/\*/\.\*/g')
+
+        [[ -z "$(egrep ^"$SSL_HOSTNAME"$ $VHOST_PATH)" ]] && echo "${SSL_HOSTNAME//\\./\.}" >> $VHOST_PATH
         SSL_VHOSTS=$(egrep ^"$SSL_HOSTNAME"$ $VHOST_PATH)
         NONSSL_VHOSTS=$(egrep -v ^"$SSL_HOSTNAME"$ $VHOST_PATH || exit 0)
 
