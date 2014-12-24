@@ -3,6 +3,7 @@
 load test_helper
 
 setup() {
+  dokku trace on
   create_app
   setup_test_tls
   deploy_app

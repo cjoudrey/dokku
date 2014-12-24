@@ -59,7 +59,8 @@ lint:
 
 unit-tests:
 	@echo running unit tests...
-	@$(QUIET) bats tests/unit
+	# @$(QUIET) bats tests/unit
+	@$(QUIET) bats tests/unit/nginx-vhosts.bats
 
 deploy-test-config:
 	@echo deploying config app...
